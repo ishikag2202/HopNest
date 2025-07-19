@@ -1,0 +1,119 @@
+<!-- <% layout("layouts/boilerplate") -%>
+<body>
+    <div class="row">
+    <div class="col-8 offset-2">
+    <br>
+    <h3>Create a New Listing</h3>
+    <form method="POST" action="/listings" novalidate class="needs-validation">
+        <div class="mb-3">
+            <label for="title" class="form-label">Enter Title</label>
+            <input name="listing[title]" placeholder="Enter title" type="text" class="form-control" required>
+            <div class="valid-feedback">Title looks good!</div>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Enter Description</label>
+            <textarea name="listing[description]" placeholder="Enter description" class="form-control" required></textarea>
+            <div class="invalid-feedback">Description should be valid</div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="image" class="form-label">Image URL</label>
+                <input type="text" name="listing[image][url]" placeholder="Image URL" class="form-control" type="url" required>
+                <div class="invalid-feedback">Please enter a valid image URL.</div>
+            </div>
+            <div class="col-md-6">
+                <label for="image" class="form-label">Image FileName</label> <br>
+                <input type="text" name="listing[image][filename]" placeholder="Image filename" class="form-control">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="mb-3 col-md-4">
+                <label for="price" class="form-label">Enter Price</label>
+                <input name="listing[price]" placeholder="Enter price"  class="form-control" type="number" min="0" step="0.01" required>
+                <div class="invalid-feedback">Price should be valid</div>
+            </div>
+            <div class="mb-3 col-md-8">
+                <label for="country" class="form-label">Enter country</label>
+                <input name="listing[country]" placeholder="Enter country" type="text" class="form-control" required>
+                <div class="invalid-feedback">Country should be valid</div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="location" class="form-label">Enter Location</label>
+            <input name="listing[location]" placeholder="Enter location" type="text" class="form-control" required>
+            <div class="invalid-feedback">Location should be valid</div>
+        </div>      
+        <br>
+        <button type="submit" class="btn btn-dark add-btn">Add</button>
+        <br>
+    </form>
+    </div>
+    </div>
+</body> --> 
+
+<% layout("layouts/boilerplate") %>
+<body>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <br>
+            <h3>Create a New Listing</h3>
+            <form method="POST" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Enter Title</label>
+                    <input name="listing[title]" placeholder="Enter title" type="text" class="form-control" required>
+                    <div class="valid-feedback">Title looks good!</div>
+                    <div class="invalid-feedback">Please enter a title.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Enter Description</label>
+                    <textarea name="listing[description]" placeholder="Enter description" class="form-control" required></textarea>
+                    <div class="invalid-feedback">Description should be valid</div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="image-filename" class="form-label">Upload Image</label>
+                        <input type="file" name="image" id="image-filename"  class="form-control">
+                        <div class="invalid-feedback">Filename is optional but should be valid if provided.</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-3 col-md-4">
+                        <label for="price" class="form-label">Enter Price</label>
+                        <input name="listing[price]" placeholder="Enter price" class="form-control" type="number" min="0" step="0.01" required>
+                        <div class="invalid-feedback">Price should be valid</div>
+                    </div>
+                    <div class="mb-3 col-md-8">
+                        <label for="country" class="form-label">Enter country</label>
+                        <input name="listing[country]" placeholder="Enter country" type="text" class="form-control" required>
+                        <div class="invalid-feedback">Country should be valid</div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="location" class="form-label">Enter Location</label>
+                    <input name="listing[location]" placeholder="Enter location" type="text" class="form-control" required>
+                    <div class="invalid-feedback">Location should be valid</div>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-dark add-btn">Add</button>
+                <br>
+            </form>
+        </div>
+    </div>
+    <script>
+        (function () {
+            'use strict';
+            const forms = document.querySelectorAll('.needs-validation');
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+    </script>
+</body>
