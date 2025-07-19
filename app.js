@@ -111,10 +111,17 @@ app.get("/", (req, res) => {
 });
 
 // Routes
+// app.get("/listings", wrapAsync(async (req, res) => {
+//     const allListings = await Listing.find({});
+//     res.render("listings/index", { allListings });
+// }));
+
 app.get("/listings", wrapAsync(async (req, res) => {
+    console.log("Redirected to /listings route");
     const allListings = await Listing.find({});
     res.render("listings/index", { allListings });
 }));
+
 
 app.get("/listings/new",isLoggedIn, (req, res) => {
     res.render("listings/new");
@@ -258,25 +265,12 @@ app.all("*",(req,res,next)=>{
     next(new ExpressError(404, "Page Not Found!"));
 });
 
-// app.use((err, req, res, next) => {
-//     const statusCode = err?.statusCode || 500;
-//     const message = err?.message || "Something went wrong!";
-//     res.status(statusCode).render("error", { message, statusCode });
-// });
-
-
 app.use((err, req, res, next) => {
     console.log("Error:", err); // Log the error for debugging
     const statusCode = err?.statusCode || 500;
     const message = err?.message || "Something went wrong!";
     res.status(statusCode).render("error", { message, statusCode });
 });
-
-// app.use((err, req, res, next) => {
-//     const statusCode = err.statusCode || 500;
-//     res.status(statusCode).render("error", { err, statusCode });
-// });
-
 
 app.listen(8080,()=>{
     console.log("server is listening to port 8080");
