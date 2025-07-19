@@ -95,14 +95,6 @@ app.use((req,res,next)=>{
     next();
 });
 
-// const validateListing = (req, res, next) => {
-//     const { error } = listingSchema.validate(req.body); // match full structure
-//     if (error) {
-//         const msg = error.details.map(el => el.message).join(",");
-//         throw new ExpressError(400, msg);
-//     }
-//     next();
-// };
 
 const validateListing = (req, res, next) => {
     const { error } = listingSchema.validate(req.body);
@@ -114,6 +106,9 @@ const validateListing = (req, res, next) => {
     next();
 };
 
+app.get("/", (req, res) => {
+    res.redirect("/listings");
+});
 
 // Routes
 app.get("/listings", wrapAsync(async (req, res) => {
